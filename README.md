@@ -26,7 +26,7 @@ Techniquement, ce projet devrait nous permettre d'expérimenter de manière plus
 - Gestion de données via une API et Room
 - Gestion de la navigation avec Navigation-fragment
 - Tests unitaires (Datasource et Repository)
-- Au moins 2 tests instrumentaires par vues
+- Au moins 3 tests instrumentalisés
 
 
 ## Différentes étapes 
@@ -37,17 +37,17 @@ Techniquement, ce projet devrait nous permettre d'expérimenter de manière plus
 3. Afficher les films d'une catégorie. Les consignes sont par [ici](https://github.com/eamosse/the-movie-app/blob/master/movie_list.md)
 
 ## Organisation
-- Groupes de 3 à 4 personnes
+- Groupes de 2 personnes (un seul groupe de 3 est autorisé)
 - Commits, branches, et pull requests (il n'y aura pas de notes de groupe, le travail de chacun sera évalué principalement sur les commits) 
 
 ## Rendu
-- Date limite : 30 Novembre 2021 (avant minuit) 
-- Modalités de rendu : Remplir le drive qui vous sera envoyé par mail
+- Date limite : 30 Avril 2022 (avant minuit) 
+- Modalités de rendu : Effectuer votre dernier commit avant la date limite
 - Ajouté un fichier readme dans lequel vous décrirez 
     - Le contexte du projet et ses différentes fonctionnalités
     - La liste des membres du groupe
     - Captures d'écrans des principales vues 
-    - Vidéos de démonstration de l'application 
+    - Vidéos de démonstration de l'application (sur Youtube)
 
 
 
