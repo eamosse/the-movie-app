@@ -7,10 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.gmail.eamosse.idbdata.data.Token
 import com.gmail.eamosse.idbdata.repository.MovieRepository
 import com.gmail.eamosse.idbdata.utils.Result
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val repository: MovieRepository) : ViewModel() {
 
     private val _token: MutableLiveData<Token> = MutableLiveData()
     val token: LiveData<Token>

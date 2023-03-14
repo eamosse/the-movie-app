@@ -4,71 +4,44 @@ import android.content.Context
 import androidx.room.Room
 import com.gmail.eamosse.idbdata.BuildConfig
 import com.gmail.eamosse.idbdata.api.service.MovieService
-import com.gmail.eamosse.idbdata.datasources.LocalDataSource
-import com.gmail.eamosse.idbdata.datasources.OnlineDataSource
 import com.gmail.eamosse.idbdata.local.daos.TokenDao
 import com.gmail.eamosse.idbdata.local.databases.IdbDataBase
-import com.gmail.eamosse.idbdata.repository.MovieRepository
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
+import javax.inject.Singleton
 
-val dataModule = module {
-    single {
-        NetworkXConfig.buildHttpClient(
-            apiKey = get(named("API_KEY")),
-            dao = get()
-        )
-    }
-    single() {
-        Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(get(named("BASE_URL")) as String)
-            .client(get())
-            .build()
-            .create(MovieService::class.java)
-    }
+@Module
+@InstallIn(SingletonComponent::class)
+object DataModule {
 
-    single {
-        LocalDataSource()
-    }
-
-    single {
-        OnlineDataSource(get())
-    }
-
-    single {
-        MovieRepository()
-    }
-
-    single {
-        DatabaseConfig.buildDatabase(get())
-    }
-
-    single {
-        DatabaseConfig.getTokenDao(get())
-    }
-}
-
-private object DatabaseConfig {
-    fun buildDatabase(context: Context): IdbDataBase {
+    @Provides
+    @Singleton
+    internal fun provideDatabase(@ApplicationContext appContext: Context): IdbDataBase {
         return Room.databaseBuilder(
-            context,
+            appContext,
             IdbDataBase::class.java, "idb_database.db"
         ).build()
     }
 
-    fun getTokenDao(db: IdbDataBase): TokenDao = db.tokenDao()
-}
+    @Provides
+    internal fun providetokenDao(database: IdbDataBase): TokenDao {
+        return database.tokenDao()
+    }
 
-private object NetworkXConfig {
-    fun buildHttpClient(apiKey: String, dao: TokenDao): OkHttpClient {
+    @Provides
+    internal fun provideHttpClient(@Named("API_KEY") apiKey: String, dao: TokenDao): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(BasicInterceptor(apiKey).requestInterceptor)
             .addInterceptor(
@@ -86,7 +59,19 @@ private object NetworkXConfig {
             .readTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
+    }
 
+    @Provides
+    internal fun retrofitBuilder(
+        @Named("BASE_URL") baseUrl: String,
+        httpClient: OkHttpClient
+    ): MovieService {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(baseUrl)
+            .client(httpClient)
+            .build()
+            .create(MovieService::class.java)
     }
 }
 
