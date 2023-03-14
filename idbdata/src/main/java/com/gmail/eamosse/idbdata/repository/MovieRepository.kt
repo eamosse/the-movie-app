@@ -8,24 +8,22 @@ import com.gmail.eamosse.idbdata.data.Token
 import com.gmail.eamosse.idbdata.datasources.LocalDataSource
 import com.gmail.eamosse.idbdata.datasources.OnlineDataSource
 import com.gmail.eamosse.idbdata.utils.Result
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import javax.inject.Inject
 
 /**
  * La classe permettant de gérer les données de l'application
  */
-class MovieRepository : KoinComponent {
-    //Gestion des sources de données locales
-    private val local: LocalDataSource by inject()
-    //Gestion des sources de données en lignes
-    private val online: OnlineDataSource by inject()
+class MovieRepository @Inject internal constructor(
+    private val local: LocalDataSource,
+    private val online: OnlineDataSource
+) {
 
     /**
      * Récupérer le token permettant de consommer les ressources sur le serveur
      * Le résultat du datasource est converti en instance d'objets publiques
      */
     suspend fun getToken(): Result<Token> {
-        return when(val result = online.getToken()) {
+        return when (val result = online.getToken()) {
             is Result.Succes -> {
                 //save the response in the local database
                 local.saveToken(result.data.toEntity())

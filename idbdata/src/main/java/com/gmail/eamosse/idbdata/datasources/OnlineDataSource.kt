@@ -4,13 +4,14 @@ import com.gmail.eamosse.idbdata.api.response.CategoryResponse
 import com.gmail.eamosse.idbdata.api.response.TokenResponse
 import com.gmail.eamosse.idbdata.api.service.MovieService
 import com.gmail.eamosse.idbdata.utils.Result
+import javax.inject.Inject
 
 /**
  * Manipule les données de l'application en utilisant un web service
  * Cette classe est interne au module, ne peut être initialisé ou exposé aux autres composants
  * de l'application
  */
-internal class OnlineDataSource(private val service: MovieService) {
+internal class OnlineDataSource @Inject constructor(private val service: MovieService) {
 
     /**
      * Récupérer le token du serveur
