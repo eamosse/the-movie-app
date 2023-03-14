@@ -1,6 +1,5 @@
 package com.gmail.eamosse.idbdata.datasources
 
-import com.gmail.eamosse.idbdata.api.response.TokenResponse
 import com.gmail.eamosse.idbdata.api.response.toToken
 import com.gmail.eamosse.idbdata.api.service.MovieService
 import com.gmail.eamosse.idbdata.data.Token
@@ -12,7 +11,7 @@ import javax.inject.Inject
  * Cette classe est interne au module, ne peut être initialisé ou exposé aux autres composants
  * de l'application
  */
-internal class OnlineDataSource @Inject constructor(private val service: MovieService) {
+internal class OnlineDataSource @Inject constructor(private val service: MovieService): MovieDataSource {
 
     /**
      * Récupérer le token du serveur
@@ -20,11 +19,11 @@ internal class OnlineDataSource @Inject constructor(private val service: MovieSe
      * Si [Result.Succes], tout s'est bien passé
      * Sinon, une erreur est survenue
      */
-    suspend fun getToken(): Result<TokenResponse> {
+    override suspend fun getToken(): Result<Token> {
         return try {
             val response = service.getToken()
             if (response.isSuccessful) {
-                Result.Succes(response.body()!!)
+                Result.Succes(response.body()!!.toToken())
             } else {
                 Result.Error(
                     exception = Exception(),
@@ -39,6 +38,10 @@ internal class OnlineDataSource @Inject constructor(private val service: MovieSe
                 code = -1
             )
         }
+    }
+
+    override suspend fun saveToken(token: Token) {
+        TODO("I don't know how to save a token, the local datasource probably does")
     }
 }
 

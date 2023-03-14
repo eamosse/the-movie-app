@@ -1,7 +1,5 @@
 package com.gmail.eamosse.idbdata.repository
 
-import com.gmail.eamosse.idbdata.api.response.toEntity
-import com.gmail.eamosse.idbdata.api.response.toToken
 import com.gmail.eamosse.idbdata.data.Token
 import com.gmail.eamosse.idbdata.datasources.LocalDataSource
 import com.gmail.eamosse.idbdata.datasources.OnlineDataSource
@@ -24,9 +22,9 @@ class MovieRepository @Inject internal constructor(
         return when (val result = online.getToken()) {
             is Result.Succes -> {
                 //save the response in the local database
-                local.saveToken(result.data.toEntity())
+                local.saveToken(result.data)
                 //return the response
-                Result.Succes(result.data.toToken())
+                Result.Succes(result.data)
             }
             is Result.Error -> result
         }
