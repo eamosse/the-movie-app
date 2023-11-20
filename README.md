@@ -48,7 +48,8 @@ Pour être complète, votre application doit proposer au moins une parmi les fon
 
 ## Critères d'acceptance
 - Il n'y a pas de notes de groupes, les commits doivent me permettre d'identifier le travail de chaque membre du groupe.
-- Utiliser obligatoirement une branche par fonctionnalité + pull request pour merger sur la branche principale. 
+- Utiliser obligatoirement une branche par fonctionnalité + pull request pour merger sur la branche principale.
+- Pas de warning dans le code ou dans les fichiers Gradle
 
 ## Rendu
 - Date limite : 10 Décembre 2023 (avant minuit)
@@ -61,4 +62,5 @@ Pour être complète, votre application doit proposer au moins une parmi les fon
 
 
 ## Vous ne savez pas par où commencer ?
-Suivez le tutoriel sur le lien suivant [ici](https://github.com/eamosse/the-movie-app/blob/master/home_tuto.md) pour afficher la liste des catégories.
+- Jettez un oeil à l'architecture du projet, c'est un projet multi-module
+- Suivez le tutoriel sur le lien suivant [ici](https://github.com/eamosse/the-movie-app/blob/master/home_tuto.md) pour afficher la liste des catégories.
