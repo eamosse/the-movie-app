@@ -42,17 +42,23 @@ Pour être complète, votre application doit proposer au moins une parmi les fon
 - Toute autre fonctionnalité intéressante proposée par la plateforme
 - Synchroniser la liste des films/séries favoris sur Firebase
 
+### Bonus
+Pour être exceptionnelle, votre application doit proposer au moins une parmi les fonctionnalités suivantes :
+- Rechercher un film ou une série
+- Afficher les plateformes de streaming pour regarder un film
+- Rediriger vers une plateforme de streaming pour regarder un film
+- ....
 
 ## Organisation
-- Groupes de 3 ou 4 étudiants (ni plus, ni moins)
+- Groupes de 3 
 
 ## Critères d'acceptance
-- Il n'y a pas de notes de groupes, les commits doivent me permettre d'identifier le travail de chaque membre du groupe.
+- Il n'y a pas de notes de groupes, les commits doivent permettre d'identifier le travail de chaque membre du groupe.
 - Utiliser obligatoirement une branche par fonctionnalité + pull request pour merger sur la branche principale.
 - Pas de warning dans le code ou dans les fichiers Gradle
 
 ## Rendu
-- Date limite : 10 Décembre 2023 (avant minuit)
+- Date limite : 15 Avril 2024 (avant minuit)
 - Modalités de rendu : Assurez-vous d'effectuer le dernier commit avant la date limite
 - Remplacer le contenu de ce fichier par :
   - La liste des fonctionnalités développées + captures d'écran de chaque fonctionnalité
@@ -61,6 +67,9 @@ Pour être complète, votre application doit proposer au moins une parmi les fon
   - Lien vers une vidéo de démonstration de l'application (sur Youtube)
 
 
-## Vous ne savez pas par où commencer ?
-- Jettez un oeil à l'architecture du projet, c'est un projet multi-module
-- Suivez le tutoriel sur le lien suivant [ici](https://github.com/eamosse/the-movie-app/blob/master/home_tuto.md) pour afficher la liste des catégories.
+# Première partie : Afficher la liste des catégories (à faire en classe)
+- Créer une branche `feature/category_main` pour récupérer le code de base
+- Renommer le package ainsi que l'identifiant de l'application
+- Migrer les fichiers de configuration gradle vers Kotlin (kts)
+- Utiliser version catalogue pour les librairies (https://developer.android.com/build/migrate-to-catalogs)
+- Suivre le [tutoriel](https://github.com/eamosse/the-movie-app/blob/master/home_tuto.md) pour afficher la liste des catégories.
